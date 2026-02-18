@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cp160bxtn28k8"]
+
+[ext_resource type="PackedScene" uid="uid://d322bbpu1i3fg" path="res://scenes/Players/Player.tscn" id="2_rwobs"]
+[ext_resource type="Script" uid="uid://bs1l4yoc06q2n" path="res://src/Levels/LevelMoneyController.cs" id="3_7orvs"]
+[ext_resource type="PackedScene" uid="uid://bx3ao173fkc0e" path="res://scenes/Levels/Store.tscn" id="3_rwobs"]
+[ext_resource type="PackedScene" uid="uid://cugvunyugfpwt" path="res://scenes/Interactables/ValuableGuckyBag.tscn" id="4_rwobs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_omh7s"]
+size = Vector2(2960, 138)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_omh7s"]
+points = PackedVector2Array(-480, 28, -392, -12, 384, -12, 560, 28)
+
+[node name="Level1" type="Node2D" unique_id=1843538185]
+
+[node name="World" type="Node2D" parent="." unique_id=567625032]
+
+[node name="Environment" type="Node2D" parent="World" unique_id=1862211566]
+
+[node name="Store" parent="World/Environment" unique_id=1874492256 instance=ExtResource("3_rwobs")]
+position = Vector2(840, 248.00002)
+scale = Vector2(2.1695445, 2.1695445)
+
+[node name="GroundCollider" type="StaticBody2D" parent="World/Environment" unique_id=1910511574]
+position = Vector2(960, 576)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Environment/GroundCollider" unique_id=2131640065]
+position = Vector2(200, 72)
+shape = SubResource("RectangleShape2D_omh7s")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/Environment" unique_id=1948781358]
+position = Vector2(1488, 560)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Environment/StaticBody2D" unique_id=1049736368]
+position = Vector2(24, -4)
+shape = SubResource("ConvexPolygonShape2D_omh7s")
+debug_color = Color(1, 0, 0, 0.41960785)
+
+[node name="ValuableGuckyBag" parent="World/Environment" unique_id=1709141728 node_paths=PackedStringArray("_moneyController", "_player") instance=ExtResource("4_rwobs")]
+position = Vector2(1808, 400)
+_moneyController = NodePath("../../../Systems/LevelMoneyController")
+_player = NodePath("../../Entities/Player")
+
+[node name="Entities" type="Node2D" parent="World" unique_id=263715352]
+
+[node name="Player" parent="World/Entities" unique_id=1702796050 instance=ExtResource("2_rwobs")]
+position = Vector2(544, 256)
+scale = Vector2(3.565, 3.565)
+
+[node name="Camera2D" type="Camera2D" parent="World/Entities/Player" unique_id=248160890]
+zoom = Vector2(0.56, 0.56)
+metadata/_edit_lock_ = true
+
+[node name="Systems" type="Node" parent="." unique_id=238432846]
+
+[node name="LevelMoneyController" type="Node" parent="Systems" unique_id=931567290 node_paths=PackedStringArray("_moneyStolenLabel")]
+script = ExtResource("3_7orvs")
+_moneyStolenLabel = NodePath("../../UI/Label")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1746377848]
+
+[node name="Label" type="Label" parent="UI" unique_id=73014337]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_right = 88.0
+grow_vertical = 0
+text = "Money Stolen: $0"
+metadata/_edit_use_anchors_ = true

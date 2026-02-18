@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://54tepmetv4b0"]
+
+[ext_resource type="Script" uid="uid://bohnjeghei3u8" path="res://src/Levels/Room.cs" id="1_emsnf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ku17w"]
+size = Vector2(360, 152)
+
+[node name="Room" type="Node2D" unique_id=1874492256 node_paths=PackedStringArray("_exteriorNode", "_interiorNode", "_playerInteriorArea")]
+script = ExtResource("1_emsnf")
+_exteriorNode = NodePath("Exterior")
+_interiorNode = NodePath("Interior")
+_playerInteriorArea = NodePath("Area2D")
+
+[node name="Interior" type="Node2D" parent="." unique_id=2130644391]
+
+[node name="Exterior" type="Node2D" parent="." unique_id=6757340]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1308853996]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1895748089]
+position = Vector2(248, 76)
+shape = SubResource("RectangleShape2D_ku17w")
+debug_color = Color(0, 0.6, 0.69803923, 0.15686275)
+
+[connection signal="body_entered" from="Area2D" to="." method="OnPlayerEnterBuilding"]
+[connection signal="body_exited" from="Area2D" to="." method="OnPlayerExitBuilding"]

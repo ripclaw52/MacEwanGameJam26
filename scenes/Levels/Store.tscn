@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://bx3ao173fkc0e"]
+
+[ext_resource type="PackedScene" uid="uid://54tepmetv4b0" path="res://scenes/Levels/Room.tscn" id="1_skel6"]
+[ext_resource type="Texture2D" uid="uid://brb0qscxid6x8" path="res://assets/Levels/store/store_interior.png" id="2_q5yrg"]
+[ext_resource type="Texture2D" uid="uid://bimmsheiuy8q" path="res://assets/Levels/store/store_shelves.png" id="3_e5o5o"]
+[ext_resource type="Texture2D" uid="uid://cps0s4ijmqxls" path="res://assets/Levels/store/store_exterior.png" id="4_h4p52"]
+[ext_resource type="Texture2D" uid="uid://d3wkwap8pbmli" path="res://assets/Levels/store/store_roof.png" id="5_f0nks"]
+[ext_resource type="Texture2D" uid="uid://cuf1axf8kdxv0" path="res://assets/Levels/store/store_windows.png" id="6_q5yrg"]
+
+[node name="Store" unique_id=1874492256 instance=ExtResource("1_skel6")]
+_opacityTransitionTimeSeconds = 0.2
+
+[node name="StoreInterior" type="TextureRect" parent="Interior" parent_id_path=PackedInt32Array(2130644391) index="0" unique_id=1294204173]
+offset_left = 128.0
+offset_top = 16.0
+offset_right = 472.0
+offset_bottom = 147.0
+texture = ExtResource("2_q5yrg")
+metadata/_edit_use_anchors_ = true
+
+[node name="StoreShelves" type="TextureRect" parent="Interior" parent_id_path=PackedInt32Array(2130644391) index="1" unique_id=547050798]
+offset_left = 128.0
+offset_top = 16.0
+offset_right = 472.0
+offset_bottom = 147.0
+texture = ExtResource("3_e5o5o")
+metadata/_edit_use_anchors_ = true
+
+[node name="KeepsOpacity" type="Node2D" parent="." index="1" unique_id=125435418]
+
+[node name="StoreExterior" type="TextureRect" parent="KeepsOpacity" index="0" unique_id=2123824730]
+offset_right = 494.0
+offset_bottom = 154.0
+texture = ExtResource("4_h4p52")
+
+[node name="TextureRect2" type="TextureRect" parent="KeepsOpacity" index="1" unique_id=1668495534]
+offset_left = 120.0
+offset_top = -8.0
+offset_right = 486.0
+offset_bottom = 88.0
+texture = ExtResource("5_f0nks")
+
+[node name="TextureRect" type="TextureRect" parent="Exterior" parent_id_path=PackedInt32Array(6757340) index="0" unique_id=1662731944]
+offset_left = 141.0
+offset_top = 41.0
+offset_right = 462.0
+offset_bottom = 138.0
+texture = ExtResource("6_q5yrg")
+
+[node name="Area2D" parent="." index="3" unique_id=1308853996]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Area2D" index="0" unique_id=1895748089]
+position = Vector2(308, 76)
+metadata/_edit_lock_ = true
