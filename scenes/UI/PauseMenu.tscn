@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://biogqh2qcv82c"]
+
+[ext_resource type="Script" uid="uid://fp2yikasfr3y" path="res://scenes/UI/PauseMenu.cs" id="1_4r2wj"]
+[ext_resource type="Shader" uid="uid://btk4tjkx36l6s" path="res://scenes/UI/PauseMenu.gdshader" id="1_fsae6"]
+[ext_resource type="Animation" uid="uid://bmt6cqqr2kvvt" path="res://scenes/UI/blur.tres" id="3_avwb0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6q0ex"]
+shader = ExtResource("1_fsae6")
+shader_parameter/lod = 0.800000038
+
+[sub_resource type="Animation" id="Animation_73e60"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:use_parent_material")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_onjwa"]
+_data = {
+&"RESET": SubResource("Animation_73e60"),
+&"blur": ExtResource("3_avwb0")
+}
+
+[node name="PauseMenu" type="Control" unique_id=1389640408]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4r2wj")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=940293307]
+material = SubResource("ShaderMaterial_6q0ex")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=140759060]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1392556000]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1454146308]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "Resume"
+
+[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer" unique_id=1142140420]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "Restart"
+
+[node name="BackToMenu" type="Button" parent="PanelContainer/VBoxContainer" unique_id=415168388]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 64
+text = "Back to Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1372043951]
+libraries/ = SubResource("AnimationLibrary_onjwa")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="OnResumePressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BackToMenu" to="." method="OnBackToMenuPressed"]
