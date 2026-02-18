@@ -8,6 +8,10 @@ namespace MacEwanGameJam26.Players;
 /// </summary>
 public partial class PlayerMovementController : Node
 {
+    [Export] private AnimatedSprite2D _animatedSprite;
+
+    private bool _facingLeft;
+
     /// <summary>
     ///     Magnitude of acceleration due to gravity in Pixels/Second.
     /// </summary>
@@ -27,6 +31,7 @@ public partial class PlayerMovementController : Node
     {
         CalculateVelocity();
         ApplyGravity();
+        UpdateSprite();
 
         // MoveAndSlide is the method used by CharacterBody2Ds to move the character using its Velocity
         _player.MoveAndSlide();
@@ -56,5 +61,24 @@ public partial class PlayerMovementController : Node
         );
 
         _player.Velocity = move;
+    }
+
+    private void UpdateSprite()
+    {
+        // Face left when moving towards -X. Face right when moving towards +X. Otherwise,
+        // do not change facing
+        _facingLeft = _player.Velocity.X switch
+        {
+            < 0 => true,
+            > 0 => false,
+            _ => _facingLeft
+        };
+
+        _animatedSprite.FlipH = _facingLeft;
+
+        if (_player.Velocity.X != 0)
+            _animatedSprite.Play("walk");
+        else
+            _animatedSprite.Play("idle");
     }
 }
