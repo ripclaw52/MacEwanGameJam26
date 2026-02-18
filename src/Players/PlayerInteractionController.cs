@@ -4,19 +4,34 @@ using MacEwanGameJam26.Interfaces;
 
 namespace MacEwanGameJam26.Players;
 
+/// <summary>
+///     This is the class responsible for handling interacting with interactables.
+/// </summary>
 public partial class PlayerInteractionController : Area2D
 {
+    /// <summary>
+    ///     Has something been interacted with in one hold of the "interaction" action
+    /// </summary>
     private bool _hasInteracted;
 
-    // How long to hold to count as interact
+    /// <summary>
+    ///     How long to hold to count as interact
+    /// </summary>
     [Export] private float _holdTimeUntilInteract = 0.5f;
 
-    // How long the interact button has been held
+    /// <summary>
+    ///     How long the interact button has been held
+    /// </summary>
     private float _interactHoldDuration;
+
     [Export] private Player _player;
 
+    // NOTE (Erwin): 
+    // As of f63d39, PlayerInteractionController is set to only detect Area2Ds with its 
+    // Collision Layer set to "Interactable"
     public override void _Process(double delta)
     {
+        // Only proceed when there is another Area2D within this controller's CollisionShape2D
         if (GetOverlappingAreas().Count == 0)
         {
             _interactHoldDuration = 0;
@@ -44,6 +59,8 @@ public partial class PlayerInteractionController : Area2D
         }
     }
 
+    // NOTE (Erwin):
+    // Don't know how this will handle interactions with overlapping interactables. 
     private void Interact()
     {
         var area = GetOverlappingAreas().FirstOrDefault();
@@ -55,5 +72,6 @@ public partial class PlayerInteractionController : Area2D
 
     private void OnArea2DEntered(Area2D area)
     {
+        // STUB
     }
 }

@@ -2,15 +2,15 @@ using Godot;
 
 namespace MacEwanGameJam26.Levels;
 
+/// <summary>
+///     This class handles the transition between the exterior and interior sprites of buildings when the player enters
+///     them.
+/// </summary>
 public partial class Building : Node2D
 {
     [Export] private Sprite2D _exteriorSprite;
     [Export] private Sprite2D _interiorSprite;
     [Export] private Area2D _playerInteriorArea;
-
-    public override void _Ready()
-    {
-    }
 
     private void OnPlayerExitBuilding(Node2D body)
     {

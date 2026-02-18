@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://54tepmetv4b0" path="res://scenes/Levels/Building.tscn" id="3_btokf"]
 [ext_resource type="PackedScene" uid="uid://cugvunyugfpwt" path="res://scenes/Interactables/ValuableGuckyBag.tscn" id="4_hxav2"]
 [ext_resource type="Script" uid="uid://bs1l4yoc06q2n" path="res://src/Levels/LevelMoneyController.cs" id="4_nmws4"]
+[ext_resource type="PackedScene" uid="uid://ii8lkydv0qob" path="res://scenes/Interactables/InteractableJumpable.tscn" id="5_vqnnq"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pkrqt"]
 
@@ -311,6 +312,9 @@ metadata/_edit_lock_ = true
 position = Vector2(984, 520)
 scale = Vector2(2, 2)
 _moneyController = NodePath("../../Systems/LevelMoneyController")
+
+[node name="InteractableJumpable" parent="World" unique_id=2025109905 instance=ExtResource("5_vqnnq")]
+position = Vector2(1072, 560)
 
 [node name="Systems" type="Node" parent="." unique_id=285499847]
 

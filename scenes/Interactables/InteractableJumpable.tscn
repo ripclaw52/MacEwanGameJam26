@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ii8lkydv0qob"]
+
+[ext_resource type="PackedScene" uid="uid://bbvkpdi2k3x6k" path="res://scenes/Interactables/BaseInteractable.tscn" id="1_f88om"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knxd4"]
+size = Vector2(32, 32)
+
+[node name="InteractableJumpable" unique_id=2025109905 instance=ExtResource("1_f88om")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1791620053]
+texture_repeat = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="2" unique_id=679789134]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0" unique_id=2001553792]
+shape = SubResource("RectangleShape2D_knxd4")
