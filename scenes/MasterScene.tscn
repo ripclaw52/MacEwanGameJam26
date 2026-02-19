@@ -1,16 +1,7 @@
 [gd_scene format=3 uid="uid://bslf6sblubx86"]
 
 [ext_resource type="PackedScene" uid="uid://cp160bxtn28k8" path="res://scenes/Levels/Level1.tscn" id="1_pkrqt"]
-[ext_resource type="PackedScene" uid="uid://biogqh2qcv82c" path="res://scenes/UI/PauseMenu.tscn" id="2_ouyn2"]
 
 [node name="MasterScene" type="Node2D" unique_id=1800971221]
 
 [node name="Level1" parent="." unique_id=1843538185 instance=ExtResource("1_pkrqt")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1261091206]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=1389640408 instance=ExtResource("2_ouyn2")]
-offset_left = 425.0
-offset_top = 292.0
-offset_right = -408.0
-offset_bottom = -249.0
