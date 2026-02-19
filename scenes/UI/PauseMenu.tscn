@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://biogqh2qcv82c"]
 
-[ext_resource type="Script" uid="uid://fp2yikasfr3y" path="res://scenes/UI/PauseMenu.cs" id="1_4r2wj"]
-[ext_resource type="Shader" uid="uid://btk4tjkx36l6s" path="res://scenes/UI/PauseMenu.gdshader" id="1_fsae6"]
-[ext_resource type="Animation" uid="uid://bmt6cqqr2kvvt" path="res://scenes/UI/blur.tres" id="3_avwb0"]
+[ext_resource type="Script" uid="uid://fp2yikasfr3y" path="res://src/UI/PauseMenu.cs" id="1_4r2wj"]
+[ext_resource type="Shader" uid="uid://btk4tjkx36l6s" path="res://src/Shaders/PauseMenu.gdshader" id="1_fsae6"]
+[ext_resource type="Animation" uid="uid://bmt6cqqr2kvvt" path="res://src/Shaders/blur.tres" id="3_avwb0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6q0ex"]
 shader = ExtResource("1_fsae6")
