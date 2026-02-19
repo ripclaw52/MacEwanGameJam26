@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://b4buoq4i46ljt"]
+
+[ext_resource type="Script" uid="uid://y7r72b7tqo2j" path="res://src/Cutscene/Intro.cs" id="1_l7lqv"]
+[ext_resource type="Texture2D" uid="uid://rehm0bhocdrl" path="res://assets/UI/title_img1.png" id="2_eeqy2"]
+[ext_resource type="Texture2D" uid="uid://cfslxlcfcyn0c" path="res://assets/UI/button_border_4.png" id="2_iu2di"]
+[ext_resource type="Texture2D" uid="uid://bbnlxuqp6i0ew" path="res://assets/Cutscene/intro-1.png" id="3_iu2di"]
+[ext_resource type="Texture2D" uid="uid://b5h6qxfhllw1y" path="res://assets/Cutscene/intro-2.png" id="4_mww2j"]
+[ext_resource type="Texture2D" uid="uid://vfa5sb26pdkc" path="res://assets/Cutscene/intro-3.png" id="5_tr2g2"]
+[ext_resource type="Texture2D" uid="uid://c0xigvdrqgpgs" path="res://assets/Cutscene/intro-4.png" id="6_0n4jv"]
+
+[sub_resource type="Animation" id="Animation_vky45"]
+resource_name = "CutsceneSequence"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.0666666, 4, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_eeqy2"), ExtResource("3_iu2di"), ExtResource("4_mww2j"), ExtResource("5_tr2g2"), ExtResource("6_0n4jv")]
+}
+
+[sub_resource type="Animation" id="Animation_eeqy2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_eeqy2")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uoygt"]
+_data = {
+&"CutsceneSequence": SubResource("Animation_vky45"),
+&"RESET": SubResource("Animation_eeqy2")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1343785026]
+script = ExtResource("1_l7lqv")
+
+[node name="BorderBackground" type="TextureRect" parent="." unique_id=1092365207]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+texture = ExtResource("2_iu2di")
+
+[node name="IntroCutsceneText" type="TextureRect" parent="." unique_id=1833878714]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 92.0
+offset_top = 94.0
+offset_right = -91.0
+offset_bottom = -92.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_eeqy2")
+stretch_mode = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=847122472]
+root_node = NodePath("../IntroCutsceneText")
+libraries/ = SubResource("AnimationLibrary_uoygt")

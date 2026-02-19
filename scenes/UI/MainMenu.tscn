@@ -57,6 +57,8 @@ layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1329194286]
+clip_contents = true
+custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 theme_override_constants/outline_size = 40
 theme_override_font_sizes/font_size = 106

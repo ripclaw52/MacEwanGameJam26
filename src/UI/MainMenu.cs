@@ -17,7 +17,7 @@ public partial class MainMenu : Control
 
 	public void OnPlayPressed()
 	{
-		GetTree().ChangeSceneToFile("res://scenes/MasterScene.tscn");
+		GetTree().ChangeSceneToFile("res://scenes/Cutscene/IntroCutscene.tscn");
 	}
 
 	public void OnQuitPressed()
