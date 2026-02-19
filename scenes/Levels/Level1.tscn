@@ -61,6 +61,7 @@ position = Vector2(544, 256)
 scale = Vector2(3.565, 3.565)
 
 [node name="Camera2D" type="Camera2D" parent="World/Entities/Player" unique_id=248160890]
+zoom = Vector2(1.5, 1.5)
 metadata/_edit_lock_ = true
 
 [node name="Systems" type="Node" parent="." unique_id=238432846]
