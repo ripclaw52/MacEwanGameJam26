@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fvulp8ewyhw8"]
 
-[ext_resource type="AudioStream" uid="uid://h4y0oipwxtum" path="res://assets/Audio/level 1 DEMO.mp3" id="1_j1dt1"]
+[ext_resource type="AudioStream" uid="uid://dfr7kv4xsxcg7" path="res://assets/Audio/level 1 updated.mp3" id="1_j1dt1"]
 
 [node name="MusicPlayer" type="Node" unique_id=967550104]
 
