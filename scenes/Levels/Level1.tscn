@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cp160bxtn28k8"]
 
 [ext_resource type="Script" uid="uid://b4mpevh2elcqx" path="res://src/Levels/Level.cs" id="1_vfbtg"]
-[ext_resource type="PackedScene" path="res://scenes/Obstacles/ObstacleCamera.tscn" id="2_7orvs"]
+[ext_resource type="PackedScene" uid="uid://c6iclcsvv8p1r" path="res://scenes/Obstacles/ObstacleCamera.tscn" id="2_7orvs"]
 [ext_resource type="PackedScene" uid="uid://d322bbpu1i3fg" path="res://scenes/Players/Player.tscn" id="2_rwobs"]
 [ext_resource type="Script" uid="uid://bs1l4yoc06q2n" path="res://src/Levels/LevelMoneyController.cs" id="3_7orvs"]
 [ext_resource type="PackedScene" uid="uid://bx3ao173fkc0e" path="res://scenes/Levels/Store.tscn" id="3_rwobs"]
@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cy0gr27a1qj1w" path="res://assets/Levels/sunset.png" id="5_jkyfg"]
 [ext_resource type="Texture2D" uid="uid://b568kuhmqxm8s" path="res://assets/Levels/store/tilemap_packed.png" id="6_4h7ej"]
 [ext_resource type="Script" uid="uid://c4fl06qlwxx6h" path="res://src/Levels/NextLevelObsever.cs" id="8_nu2g1"]
-[ext_resource type="PackedScene" uid="uid://cee14ut1nqwjd" path="res://scenes/UI/CaughtScreen.tscn" id="9_8nqap"]
-[ext_resource type="PackedScene" uid="uid://c6umdsvmq1bin" path="res://scenes/UI/LevelCompleteScene.tscn" id="12_5mhgh"]
+[ext_resource type="PackedScene" path="res://scenes/UI/CaughtScreen.tscn" id="9_8nqap"]
+[ext_resource type="PackedScene" uid="uid://cbh86cgtotjph" path="res://scenes/UI/LevelCompleteScene.tscn" id="12_5mhgh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_omh7s"]
 size = Vector2(2960, 138)
@@ -514,8 +514,8 @@ sources/0 = SubResource("TileSetAtlasSource_8nqap")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4ox6"]
 size = Vector2(50, 286.5)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_dfih8"]
-radius = 64.00781
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu2g1"]
+size = Vector2(568, 240)
 
 [node name="Level1" type="Node2D" unique_id=1843538185 node_paths=PackedStringArray("MainPlayer")]
 script = ExtResource("1_vfbtg")
@@ -605,15 +605,19 @@ shape = SubResource("RectangleShape2D_u4ox6")
 position = Vector2(2653, 479.25)
 shape = SubResource("RectangleShape2D_u4ox6")
 
-[node name="CompleteLevel" type="Node2D" parent="World/Environment" unique_id=315076373 node_paths=PackedStringArray("_detectionArea")]
+[node name="CompleteLevel" type="Node2D" parent="World/Environment" unique_id=315076373 node_paths=PackedStringArray("_completionScene", "_detectionArea", "_player")]
 position = Vector2(2100, 500)
 script = ExtResource("8_nu2g1")
+_completionScene = NodePath("../../../UI/LevelCompleteScene")
 _detectionArea = NodePath("Area2D")
+_player = NodePath("../../Entities/Player")
 
 [node name="Area2D" type="Area2D" parent="World/Environment/CompleteLevel" unique_id=1367852112]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Environment/CompleteLevel/Area2D" unique_id=554839344]
-shape = SubResource("CircleShape2D_dfih8")
+position = Vector2(248, -44)
+shape = SubResource("RectangleShape2D_nu2g1")
 debug_color = Color(0.17825389, 0.6371308, 0.26406184, 0.41960785)
 
 [node name="RichTextLabel" type="RichTextLabel" parent="World/Environment" unique_id=1371367550]
@@ -682,4 +686,4 @@ visible = false
 visible = false
 
 [connection signal="OnPlayerCaught" from="." to="UI/CaughtScreen" method="HandlePlayerCaught"]
-[connection signal="OnPlayerCompletedLevel" from="." to="UI/LevelCompleteScene" method="HandlePlayerCompletedLevel"]
+[connection signal="OnValuablePickedUp" from="World/Environment/ValuableGuckyBag" to="World/Environment/CompleteLevel" method="HandleValuablePickedUp"]

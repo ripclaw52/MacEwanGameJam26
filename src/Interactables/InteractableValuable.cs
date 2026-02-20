@@ -6,6 +6,9 @@ namespace MacEwanGameJam26.Interactables;
 
 public partial class InteractableValuable : BaseInteractable
 {
+    [Signal]
+    public delegate void OnValuablePickedUpEventHandler();
+
     private bool _hasBeenInteractedWith;
     [Export] private Node2D _interactableCircle;
     [Export] private Sprite2D _interactableInnerCircle;
@@ -72,6 +75,8 @@ public partial class InteractableValuable : BaseInteractable
         _hasBeenInteractedWith = true;
         CustomLogger.LogDebug($"Got {Name}");
         _moneyController.MoneyStolen += MonetaryValue;
+
+        EmitSignalOnValuablePickedUp();
 
         _onStealLabel.Show();
 

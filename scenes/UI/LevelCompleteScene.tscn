@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c6umdsvmq1bin"]
+[gd_scene format=3 uid="uid://cbh86cgtotjph"]
 
 [ext_resource type="Script" uid="uid://td7yww5w632p" path="res://src/UI/CaughtScreen.cs" id="1_3c4om"]
 [ext_resource type="Shader" uid="uid://btk4tjkx36l6s" path="res://src/Shaders/PauseMenu.gdshader" id="1_v6cge"]
@@ -69,6 +69,7 @@ _data = {
 }
 
 [node name="LevelCompleteScene" type="CanvasLayer" unique_id=1225057473 node_paths=PackedStringArray("_animationPlayer")]
+process_mode = 3
 script = ExtResource("1_3c4om")
 _animationPlayer = NodePath("AnimationPlayer")
 
