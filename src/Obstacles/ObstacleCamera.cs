@@ -1,21 +1,24 @@
 using System;
+using System.Collections.Generic;
 using Godot;
+using MacEwanGameJam26.Levels;
 using MacEwanGameJam26.Players;
 
 namespace MacEwanGameJam26.Obstacles;
 
-[Tool]
 public partial class ObstacleCamera : Node2D
 {
-    [Signal]
-    public delegate void OnPlayerDetectedEventHandler();
+    [Export] private ProgressBar _bar;
 
     [Export] private Area2D _detectionArea;
     private float _detectionTime;
     private bool _hasPlayerBeenDetected;
     private bool _isPlayerBeingDetected;
 
-    [Export] private float _timeToDetectionSec = 2f;
+    [Export] private float _timeToDetectionSec = 0.4f;
+
+    private PlayerShapeShiftingController ShapeShiftingController =>
+        Level.CurrentLevel.MainPlayer.ShapeShiftingController;
 
     public override void _Ready()
     {
@@ -31,10 +34,14 @@ public partial class ObstacleCamera : Node2D
 
     public override void _Process(double delta)
     {
-        if (_isPlayerBeingDetected && !_hasPlayerBeenDetected)
+        if (_hasPlayerBeenDetected)
+            return;
+
+        if (_isPlayerBeingDetected && ShapeShiftingController.CurrentForm is not PlayerShiftFormCat)
         {
             _detectionTime += (float)GetProcessDeltaTime();
-            if (_detectionTime >= _timeToDetectionSec) DetectPlayer();
+            if (_detectionTime >= _timeToDetectionSec)
+                DetectPlayer();
         }
         else
         {
@@ -43,19 +50,26 @@ public partial class ObstacleCamera : Node2D
         }
 
         _detectionTime = Math.Clamp(_detectionTime, 0, _timeToDetectionSec);
+        _bar.Value = _detectionTime / _timeToDetectionSec;
+        if (_bar.Value == 0)
+            _bar.Hide();
+        else
+            _bar.Show();
     }
 
     public override string[] _GetConfigurationWarnings()
     {
+        var errs = new List<string>();
         if (_detectionArea is null)
-            return ["_detectionArea is null"];
-        return [];
+            errs.Add("_detectionArea is null");
+
+        return [.. errs];
     }
 
     private void DetectPlayer()
     {
         _hasPlayerBeenDetected = true;
-        EmitSignalOnPlayerDetected();
+        Level.CurrentLevel.AnnouncePlayerCaught();
         CustomLogger.LogDebug($"Player detected by {Name} ({GetType().Name})");
     }
 
@@ -63,6 +77,7 @@ public partial class ObstacleCamera : Node2D
     {
         if (node is not Player)
             return;
+
         _isPlayerBeingDetected = true;
     }
 

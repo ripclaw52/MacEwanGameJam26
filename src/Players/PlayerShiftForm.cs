@@ -7,7 +7,10 @@ namespace MacEwanGameJam26.Players;
 /// </summary>
 public partial class PlayerShiftForm : Node
 {
+    [Export] protected AnimatedSprite2D AnimatedSprite;
     [Export] protected PlayerShapeShiftingController ShiftingController;
+
+    [Export] protected SpriteFrames SpriteFrames;
 
     [Export] public string FormName { get; private set; }
 
@@ -20,5 +23,6 @@ public partial class PlayerShiftForm : Node
     protected void Shift(PlayerShiftForm newForm)
     {
         ShiftingController.CurrentForm = newForm;
+        AnimatedSprite.SpriteFrames = SpriteFrames;
     }
 }

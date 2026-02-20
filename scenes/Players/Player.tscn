@@ -1,56 +1,26 @@
 [gd_scene format=3 uid="uid://d322bbpu1i3fg"]
 
 [ext_resource type="Script" uid="uid://b7qme5gqbyk3p" path="res://src/Players/Player.cs" id="1_f0mf6"]
-[ext_resource type="Texture2D" uid="uid://dnoisq6eiair6" path="res://assets/Players/Gobbo1.png" id="2_45fmh"]
 [ext_resource type="Script" uid="uid://2guolg06rvxn" path="res://src/Players/PlayerMovementController.cs" id="2_d0tyu"]
+[ext_resource type="SpriteFrames" uid="uid://bsbfyyk6p5gl" path="res://scenes/Players/PlayerNormalForm.tres" id="2_yecw2"]
 [ext_resource type="Script" uid="uid://bvbq386kdf34w" path="res://src/Players/PlayerShapeShiftingController.cs" id="4_7tlpa"]
 [ext_resource type="Script" uid="uid://cf30m5ar1a6la" path="res://src/Players/PlayerDebugLabel.cs" id="5_cdd6o"]
-[ext_resource type="Script" uid="uid://vewwxilbhmkb" path="res://src/Players/PlayerShiftFormNormal.cs" id="5_pqexr"]
-[ext_resource type="Script" uid="uid://dk1p5my685ifr" path="res://src/Players/PlayerShiftFormJumper.cs" id="6_yecw2"]
+[ext_resource type="PackedScene" uid="uid://b0e7sn2xccygw" path="res://scenes/Players/FormNormal.tscn" id="5_pqexr"]
+[ext_resource type="Script" uid="uid://dow8xmj1y00gx" path="res://src/Players/PlayerShiftFormCat.cs" id="6_yecw2"]
+[ext_resource type="SpriteFrames" uid="uid://jxyut7tt1h11" path="res://scenes/Players/PlayerCatForm.tres" id="7_v5xr6"]
 [ext_resource type="Script" uid="uid://q25qtla0r2yv" path="res://src/Players/OnFormShiftFeedbackParticles.cs" id="8_yecw2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45fmh"]
 size = Vector2(13, 23)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfojw"]
-atlas = ExtResource("2_45fmh")
-region = Rect2(36, 1, 16, 25)
+[sub_resource type="Curve" id="Curve_yecw2"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cdd6o"]
-atlas = ExtResource("2_45fmh")
-region = Rect2(20, 1, 16, 25)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7tlpa"]
-atlas = ExtResource("2_45fmh")
-region = Rect2(4, 1, 16, 25)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_d0tyu"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfojw")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 0.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cdd6o")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfojw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7tlpa")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 8.0
-}]
-
-[node name="Player" type="CharacterBody2D" unique_id=1702796050]
+[node name="Player" type="CharacterBody2D" unique_id=1702796050 node_paths=PackedStringArray("MovementController", "ShapeShiftingController")]
 script = ExtResource("1_f0mf6")
+MovementController = NodePath("PlayerMovementController")
+ShapeShiftingController = NodePath("PlayerShapeShiftingController")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2144858724]
 position = Vector2(-0.5, 1.5)
@@ -58,7 +28,7 @@ shape = SubResource("RectangleShape2D_45fmh")
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1922127370]
-sprite_frames = SubResource("SpriteFrames_d0tyu")
+sprite_frames = ExtResource("2_yecw2")
 animation = &"idle"
 metadata/_edit_lock_ = true
 
@@ -72,17 +42,18 @@ _player = NodePath("..")
 script = ExtResource("4_7tlpa")
 CurrentForm = NodePath("FormNormal")
 
-[node name="FormNormal" type="Node" parent="PlayerShapeShiftingController" unique_id=1393643742 node_paths=PackedStringArray("ShiftingController")]
-script = ExtResource("5_pqexr")
+[node name="FormNormal" parent="PlayerShapeShiftingController" unique_id=1824548161 node_paths=PackedStringArray("AnimatedSprite", "ShiftingController") instance=ExtResource("5_pqexr")]
+AnimatedSprite = NodePath("../../AnimatedSprite2D")
 ShiftingController = NodePath("..")
-FormName = "Normal"
-ActionShortcutName = &"PlayerShiftFormNormal"
+SpriteFrames = ExtResource("2_yecw2")
 
-[node name="FormJumper" type="Node" parent="PlayerShapeShiftingController" unique_id=611518916 node_paths=PackedStringArray("ShiftingController")]
+[node name="FormCat" type="Node" parent="PlayerShapeShiftingController" unique_id=272549031 node_paths=PackedStringArray("AnimatedSprite", "ShiftingController")]
 script = ExtResource("6_yecw2")
+AnimatedSprite = NodePath("../../AnimatedSprite2D")
 ShiftingController = NodePath("..")
-FormName = "Jumper"
-ActionShortcutName = &"PlayerShiftFormJumper"
+SpriteFrames = ExtResource("7_v5xr6")
+FormName = "Cat"
+ActionShortcutName = &"PlayerShiftFormCat"
 
 [node name="Control" type="CanvasLayer" parent="." unique_id=2042625612]
 visible = false
@@ -101,15 +72,17 @@ _shiftingController = NodePath("../../PlayerShapeShiftingController")
 
 [node name="OnFormShiftFeedbackParticles" type="CPUParticles2D" parent="." unique_id=576791292 node_paths=PackedStringArray("_shiftingController")]
 emitting = false
-lifetime = 5.0
+amount = 16
+lifetime = 0.3
 one_shot = true
 explosiveness = 1.0
 direction = Vector2(0, -1)
 spread = 180.0
 initial_velocity_min = 365.08
 initial_velocity_max = 365.08
-scale_amount_min = 2.0
-scale_amount_max = 2.0
+scale_amount_min = 0.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_yecw2")
 script = ExtResource("8_yecw2")
 _shiftingController = NodePath("../PlayerShapeShiftingController")
 metadata/_edit_lock_ = true

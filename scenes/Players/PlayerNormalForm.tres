@@ -1,0 +1,40 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://bsbfyyk6p5gl"]
+
+[ext_resource type="Texture2D" uid="uid://dnoisq6eiair6" path="res://assets/Players/Gobbo1.png" id="1_jdfh3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfojw"]
+atlas = ExtResource("1_jdfh3")
+region = Rect2(36, 1, 16, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdd6o"]
+atlas = ExtResource("1_jdfh3")
+region = Rect2(20, 1, 16, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tlpa"]
+atlas = ExtResource("1_jdfh3")
+region = Rect2(4, 1, 16, 25)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfojw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdd6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfojw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tlpa")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]

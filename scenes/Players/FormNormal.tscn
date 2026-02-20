@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b0e7sn2xccygw"]
+
+[ext_resource type="Script" uid="uid://vewwxilbhmkb" path="res://src/Players/PlayerShiftFormNormal.cs" id="1_yi8j3"]
+
+[node name="FormNormal" type="Node" unique_id=1824548161 node_paths=PackedStringArray("ShiftingController")]
+script = ExtResource("1_yi8j3")
+ShiftingController = NodePath("")
+FormName = "Normal"
+ActionShortcutName = &"PlayerShiftFormNormal"

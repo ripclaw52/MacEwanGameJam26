@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dudqflmi0ycuo"]
+
+[ext_resource type="Script" uid="uid://td7yww5w632p" path="res://src/UI/CaughtScreen.cs" id="1_dr7ww"]
+[ext_resource type="Shader" uid="uid://btk4tjkx36l6s" path="res://src/Shaders/PauseMenu.gdshader" id="2_r5br1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p0qrc"]
+shader = ExtResource("2_r5br1")
+shader_parameter/lod = 0.800000038
+
+[sub_resource type="Animation" id="Animation_r5br1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.800000038]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_edepv"]
+resource_name = "blur"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.000000095]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5br1"]
+_data = {
+&"RESET": SubResource("Animation_r5br1"),
+&"blur": SubResource("Animation_edepv")
+}
+
+[node name="CaughtScreen" type="CanvasLayer" unique_id=1313426740 node_paths=PackedStringArray("_animationPlayer")]
+process_mode = 3
+script = ExtResource("1_dr7ww")
+_animationPlayer = NodePath("AnimationPlayer")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=468073251]
+material = SubResource("ShaderMaterial_p0qrc")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1866255646]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -101.0
+offset_right = 225.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1107817337]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=360977037]
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "CAUGHT :("
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=1529593988]
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=2063671449]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Restart"
+
+[node name="MainMenu" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer" unique_id=650901929]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Main Menu"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1678828526]
+libraries/ = SubResource("AnimationLibrary_r5br1")
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/Restart" to="." method="OnRestartPressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/MainMenu" to="." method="OnBackToMenuPressed"]

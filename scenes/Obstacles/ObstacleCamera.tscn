@@ -3,8 +3,23 @@
 [ext_resource type="Script" uid="uid://c10g2x72fc25a" path="res://src/Obstacles/ObstacleCamera.cs" id="1_dffan"]
 [ext_resource type="Texture2D" uid="uid://07r83qoudr6d" path="res://assets/Obstacles/CCTV.png" id="1_dqmjx"]
 
-[node name="ObstacleCamera" type="Node2D" unique_id=2129880136]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dffan"]
+bg_color = Color(11.708403, 0, 0, 1)
+
+[node name="ObstacleCamera" type="Node2D" unique_id=2129880136 node_paths=PackedStringArray("_bar")]
 script = ExtResource("1_dffan")
+_bar = NodePath("ProgressBar")
+_timeToDetectionSec = 0.4
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=697754572]
 texture = ExtResource("1_dqmjx")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1727420678]
+visible = false
+offset_left = -64.0
+offset_top = -48.0
+offset_right = 64.0
+offset_bottom = -40.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_dffan")
+max_value = 1.0
+show_percentage = false

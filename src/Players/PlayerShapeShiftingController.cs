@@ -1,14 +1,11 @@
 ﻿using Godot;
+using Godot.Collections;
 
 namespace MacEwanGameJam26.Players;
 
 /// <summary>
 ///     This class handles the shape-shifting mechanic. It stores the current shape as well.
 /// </summary>
-/// <remarks>
-///     Despite being called controller, it is not responsible for changing the ShiftForm.
-///     It is up to the PlayerShiftForm to handle how switching to it works.
-/// </remarks>
 public partial class PlayerShapeShiftingController : Node
 {
     /// <summary>
@@ -16,6 +13,8 @@ public partial class PlayerShapeShiftingController : Node
     /// </summary>
     [Signal]
     public delegate void OnFormChangedEventHandler(PlayerShiftForm old, PlayerShiftForm new0);
+
+    private readonly Array<PlayerShiftForm> _forms = [];
 
     /// <remarks>
     ///     OnFormChanged signal will NOT be fired when shifting to the same form
@@ -45,7 +44,12 @@ public partial class PlayerShapeShiftingController : Node
         {
             if (node is not PlayerShiftForm form)
                 continue;
+            _forms.Add(form);
             CustomLogger.LogDebug($"Registering form {form.GetType().Name}");
         }
+    }
+
+    public override void _Process(double delta)
+    {
     }
 }
